@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription Technolab ISTA</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Redirect to `accueil.html` only once per browser session so links still work.
+        (function(){
+            try{
+                // Do nothing if we're already on the accueil page
+                var p = window.location.pathname ? window.location.pathname.toLowerCase() : '';
+                if(p.endsWith('/accueil.html')) return;
+
+                // If we've already shown accueil this session, don't redirect again
+                if(sessionStorage.getItem('accueilShown')) return;
+
+                // Mark that we've shown accueil for this session and redirect
+                sessionStorage.setItem('accueilShown','1');
+                window.location.replace('accueil.html');
+            }catch(e){/* ignore errors */}
+        })();
+    </script>
+</head>
+<body>
+
+<div id="rideau">
+    <img src="logo.png.png" alt="Technolab ISTA" class="logo-animation">
+</div>
+
+    <header class="site-header">
+        <img src="logo.png.png" alt="logo">
+        <div>
+            <h1>Technolab ISTA</h1>
+            <div class="sub-header">Fiche d'inscription</div>
+        </div>
+    </header>
+
+    <main class="container card">
+        <h1>Fiche d'inscription - Technolab ISTA</h1>
+
+        <form id="formInscription">
+    <label>Nom :</label>
+    <input type="text" id="nom" required>
+
+    <label>Prénom :</label>
+    <input type="text" id="prenom" required>
+
+    <label>Email :</label>
+    <input type="email" id="email" required>
+
+    <label>Annexe :</label>
+    <select id="annexe">
+        <option value="Annexe A">Annexe A</option>
+        <option value="Annexe B">Annexe B</option>
+        <option value="Annexe C">Annexe C</option>
+        <option value="Chez haidara">Chez haidara</option>
+        <option value="Chez le manifique le sublime le brillant et exellent Nouhoum diabate">Chez le manifique le sublime le brillant et exellent Nouhoum diabate</option>
+    </select>
+
+    <label>Quelle filière voulez-vous faire ?</label>
+    <div>
+        <button type="button" id="btnFiliere">Choisir la filière</button>
+        <span id="filiereChoisie" style="margin-left:10px;color:#333"></span>
+        <input type="hidden" id="filiere" name="filiere">
+    </div>
+
+    <div id="filiereList" style="display:none;margin:10px 0;padding:10px;border:1px solid #ddd;background:#fff;max-height:160px;overflow:auto">
+        <!-- Liste des filières informatiques -->
+        <ul style="list-style:none;padding:0;margin:0">
+            <li><button type="button" class="filiere-item">Informatique générale</button></li>
+            <li><button type="button" class="filiere-item">Génie logiciel</button></li>
+            <li><button type="button" class="filiere-item">Développement web</button></li>
+            <li><button type="button" class="filiere-item">Développement mobile</button></li>
+            <li><button type="button" class="filiere-item">Réseaux et télécommunications</button></li>
+            <li><button type="button" class="filiere-item">Sécurité informatique</button></li>
+            <li><button type="button" class="filiere-item">Intelligence artificielle</button></li>
+            <li><button type="button" class="filiere-item">Data Science / Big Data</button></li>
+            <li><button type="button" class="filiere-item">Cloud computing / DevOps</button></li>
+            <li><button type="button" class="filiere-item">Informatique embarquée</button></li>
+            <li><button type="button" class="filiere-item">Systèmes d'information</button></li>
+            <li><button type="button" class="filiere-item">Bases de données</button></li>
+            <li><button type="button" class="filiere-item">Internet des objets (IoT)</button></li>
+            <li><button type="button" class="filiere-item">Graphisme / Multimédia</button></li>
+            <li><button type="button" class="filiere-item">Bioinformatique</button></li>
+            <li><button type="button" class="filiere-item">Algorithmique avancée</button></li>
+        </ul>
+    </div>
+
+    <label>Diplôme souhaité :</label>
+    <select id="diplome">
+        <option value="DUT">DUT</option>
+        <option value="Licence">Licence</option>
+        <option value="Master">Master</option>
+        <option value="Doctorat">Doctorat</option>
+    </select>
+
+    <label>Nationalité :</label>
+    <input type="text" id="nationalite" placeholder="Ex: Malienne " required>
+
+    <label>Pays de naissance :</label>
+    <input type="text" id="paysNaissance" placeholder="Ex: Mali" required>
+
+    <label>Quartier :</label>
+    <input type="text" id="quartier" placeholder="Quartier / Ville" required>
+
+    <button type="submit">S'inscrire</button>
+</form>
+        <div style="margin-top:14px">
+            <a href="accueil.html" class="bouton-page secondary">Accueil</a>
+            <a href="status.html" class="bouton-page">Consulter le statut</a>
+            <a href="admin-login.html" class="bouton-page" style="margin-left:10px">Espace administrateur</a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

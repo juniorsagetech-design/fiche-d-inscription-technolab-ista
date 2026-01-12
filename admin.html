@@ -1,0 +1,76 @@
+// Sauvegarder l'inscription
+const form = document.getElementById("formInscription");
+
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let nom = document.getElementById("nom").value;
+        let prenom = document.getElementById("prenom").value;
+        let email = document.getElementById("email").value;
+        let annexe = document.getElementById("annexe").value;
+
+        let inscrits = JSON.parse(localStorage.getItem("inscrits")) || [];
+
+        // Vérifier doublon par email
+        if (inscrits.some(x => x.email === email)) {
+            alert("Cette personne est déjà inscrite !");
+            return;
+        }
+
+        inscrits.push({
+            <!doctype html>
+            <html lang="fr">
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Admin - Technolab ISTA</title>
+                <link rel="stylesheet" href="style.css">
+            </head>
+            <body>
+                <header class="site-header">
+                    <img src="logo.png.png" alt="logo">
+                    <div>
+                        <h1>Technolab ISTA</h1>
+                        <div class="sub-header">Administration</div>
+                    </div>
+                </header>
+
+                <main class="container">
+                    <div class="card">
+                        <h1>Administration</h1>
+                        <p>Actions d'administration pour les inscriptions.</p>
+
+                        <p><a href="liste.html" class="bouton-page">Voir la liste des inscrits</a></p>
+
+                        <p>
+                            <button id="clearAll" class="bouton-page">Supprimer toutes les inscriptions</button>
+                        </p>
+
+                        <p id="count">Nombre d'inscrits : 0</p>
+                    </div>
+                </main>
+
+                <script>
+                    // Sécurité: rediriger vers la page de connexion si l'administrateur n'est pas authentifié.
+                    if (!sessionStorage.getItem('adminAuth')) {
+                        window.location.href = 'admin-login.html';
+                    }
+
+                    const countEl = document.getElementById('count');
+                    function updateCount(){
+                        const inscrits = JSON.parse(localStorage.getItem('inscrits')) || [];
+                        countEl.textContent = "Nombre d'inscrits : " + inscrits.length;
+                    }
+                    document.getElementById('clearAll').addEventListener('click', function(){
+                        if(confirm("Voulez-vous vraiment supprimer toutes les inscriptions ?")){
+                            localStorage.removeItem('inscrits');
+                            updateCount();
+                            alert('Toutes les inscriptions ont été supprimées.');
+                        }
+                    });
+                    updateCount();
+                </script>
+            </body>
+            </html>
+    }

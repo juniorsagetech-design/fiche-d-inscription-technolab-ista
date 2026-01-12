@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login - Technolab ISTA</title>
+  <link rel="stylesheet" href="style.css">
+  <style>body{display:flex;align-items:center;justify-content:center;height:100vh} .login-box{background:#fff;padding:20px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.08);text-align:center;width:320px}</style>
+</head>
+<body>
+  <header class="site-header">
+    <img src="logo.png.png" alt="logo">
+    <div>
+      <h1>Technolab ISTA</h1>
+      <div class="sub-header">Espace administrateur</div>
+    </div>
+  </header>
+
+  <main class="login-box">
+    <img src="logo.png.png" alt="logo" style="width:120px;margin-bottom:12px">
+    <h2 style="margin-top:6px">Connexion Administrateur</h2>
+    <p>Entrez le code d'administration pour continuer</p>
+    <div style="position:relative;margin:10px 0">
+      <input id="adminCode" type="password" placeholder="Code" style="width:100%;padding:10px 40px 10px 10px;border:1px solid #ddd;border-radius:8px">
+      <button id="toggleCode" aria-pressed="false" aria-label="Afficher le code" title="Afficher/Masquer" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:transparent;cursor:pointer;padding:6px;border-radius:6px">
+        👁️
+      </button>
+    </div>
+    <button id="btnLogin" class="btn" style="width:100%">Entrer</button>
+    <p style="margin-top:12px;color:#666;font-size:13px">Code fourni par l'administrateur</p>
+  </main>
+
+  <script>
+    document.getElementById('btnLogin').addEventListener('click', function(){
+      const code = document.getElementById('adminCode').value.trim();
+      if(code === 'h0507'){
+        sessionStorage.setItem('adminAuth','1');
+        window.location.href = 'admin.html';
+      } else {
+        alert('Code invalide');
+      }
+    });
+
+    // Allow Enter
+    document.getElementById('adminCode').addEventListener('keyup', function(e){ if(e.key === 'Enter') document.getElementById('btnLogin').click(); });
+
+    // Toggle show/hide code
+    document.getElementById('toggleCode').addEventListener('click', function(){
+      var input = document.getElementById('adminCode');
+      var btn = document.getElementById('toggleCode');
+      if(input.type === 'password'){
+        input.type = 'text';
+        btn.setAttribute('aria-pressed','true');
+        btn.setAttribute('aria-label','Masquer le code');
+        btn.title = 'Masquer';
+      } else {
+        input.type = 'password';
+        btn.setAttribute('aria-pressed','false');
+        btn.setAttribute('aria-label','Afficher le code');
+        btn.title = 'Afficher';
+      }
+      input.focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liste des inscrits</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="logo.png.png" alt="logo">
+    <div>
+      <h1>Technolab ISTA</h1>
+      <div class="sub-header">Liste des inscrits</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Liste des inscrits</h1>
+
+    <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Annexe</th>
+          <th>Filière</th>
+          <th>Diplôme</th>
+          <th>Nationalité</th>
+          <th>Pays naissance</th>
+          <th>Quartier</th>
+          <th>Statut</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableInscrits"></tbody>
+    </table>
+    </div>
+
+    <a href="index.html" class="bouton-page">Retour</a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Rediriger les utilisateurs non-authentifiés (non-admin) vers la page status
+    if (!sessionStorage.getItem('adminAuth')) {
+      window.location.href = 'status.html';
+    }
+  </script>
+</body>
+</html>

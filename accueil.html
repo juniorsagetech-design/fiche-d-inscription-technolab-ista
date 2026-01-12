@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technolab ISTA - Accueil</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg)}
+    .home{max-width:720px;text-align:center;background:var(--card);padding:36px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    .home img.logo-home{width:240px;max-width:60%;display:block;margin:0 auto 18px}
+    .home h1{margin:8px 0 18px}
+    .home .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .home .actions a{display:inline-block;padding:12px 18px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+    .home .actions a.secondary{background:#f3f6fb;color:var(--accent);border:1px solid #d9e2ec}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <img src="logo.png.png" alt="logo">
+    <div>
+      <h1>Technolab ISTA</h1>
+      <div class="sub-header">Inscription - Suivi - Administration</div>
+    </div>
+  </header>
+
+  <main class="home">
+    <img src="logo.png.png" alt="Technolab ISTA" class="logo-home">
+    <h1>Bienvenue au Technolab ISTA</h1>
+    <p>Choisissez une action ci-dessous.</p>
+    <div class="actions" style="margin-top:18px">
+      <a href="index.html" class="btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L12 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>S'inscrire</a>
+      <a href="status.html" class="bouton-page secondary">Vérifier mon statut</a>
+      <a href="admin-login.html" class="btn">Administrateur</a>
+    </div>
+
+    <!-- (Showcase removed) -->
+
+    <p style="margin-top:18px;color:#666;font-size:13px">Utilisez le code administrateur pour accéder à l'espace admin.</p>
+  </main>
+  <!-- showcase script removed -->
+</body>
+</html>

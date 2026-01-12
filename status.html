@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulter le statut - Technolab ISTA</title>
+  <link rel="stylesheet" href="style.css">
+  <style>.status-box{max-width:500px;margin:40px auto;padding:18px;background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.06)} .status-result{padding:12px;border-radius:6px;background:#f6f8fa;margin-top:12px}</style>
+</head>
+<body>
+  <header class="site-header">
+    <img src="logo.png.png" alt="logo">
+    <div>
+      <h1>Technolab ISTA</h1>
+      <div class="sub-header">Consulter votre statut</div>
+    </div>
+  </header>
+
+  <main class="container status-box">
+    <h1>Consulter votre statut</h1>
+    <p>Entrez votre nom ou prénom (ou les deux) pour voir le statut de votre inscription.</p>
+    <input id="nameStatus" type="text" placeholder="Nom ou Prénom" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
+    <button id="btnCheck" class="btn" style="margin-top:10px">Voir le statut</button>
+    <div id="result" class="status-result" style="display:none"></div>
+    <p style="margin-top:12px"><a href="index.html" class="bouton-page">Retour à l'inscription</a></p>
+  </main>
+
+  <script>
+    function findByName(query){
+      const q = (query || '').toLowerCase().trim();
+      const inscrits = JSON.parse(localStorage.getItem('inscrits')) || [];
+      if(!q) return null;
+      // match if query is contained in nom or prenom or full name
+      return inscrits.find(i => {
+        const full = ((i.nom||'') + ' ' + (i.prenom||'')).toLowerCase();
+        return (i.nom && i.nom.toLowerCase().includes(q)) || (i.prenom && i.prenom.toLowerCase().includes(q)) || full.includes(q);
+      });
+    }
+
+    document.getElementById('btnCheck').addEventListener('click', function(){
+      const name = document.getElementById('nameStatus').value.trim();
+      const resEl = document.getElementById('result');
+      if(!name){ alert('Entrez votre nom ou prénom'); return; }
+      const found = findByName(name);
+      if(!found){
+        resEl.style.display='block';
+        resEl.innerHTML = '<strong>Aucune inscription trouvée pour ce nom/prénom.</strong>';
+        return;
+      }
+      resEl.style.display='block';
+      function statusBadge(s){
+        const statut = (s || '').toLowerCase();
+        if(statut === 'accepté' || statut === 'accepte' || statut === 'accepted'){
+          return `<span class="badge badge-accepted">${s}</span>`;
+        }
+        if(statut === 'en attente' || statut === 'waiting'){
+          return `<span class="badge badge-waiting">${s}</span>`;
+        }
+        if(statut === 'annulé' || statut === 'annule' || statut === 'cancelled'){
+          return `<span class="badge badge-cancelled">${s}</span>`;
+        }
+        return `<span class="badge">${s}</span>`;
+      }
+      resEl.innerHTML = '<strong>Statut :</strong> ' + statusBadge(found.statut || 'N/A') + '<br>' +
+                        '<strong>Nom :</strong> ' + (found.nom || '') + '<br>' +
+                        '<strong>Prénom :</strong> ' + (found.prenom || '') + '<br>' +
+                        '<strong>Filière :</strong> ' + (found.filiere || '') + '<br>' +
+                        '<strong>Diplôme :</strong> ' + (found.diplome || '') + '<br>' +
+                        '<strong>Date inscription :</strong> ' + (found.date || '');
+    });
+
+    // allow Enter
+    document.getElementById('nameStatus').addEventListener('keyup', function(e){ if(e.key === 'Enter') document.getElementById('btnCheck').click(); });
+  </script>
+</body>
+</html>
